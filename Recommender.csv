@@ -1,0 +1,27 @@
+
+# Generate mock data (run once)
+import pandas as pd
+from faker import Faker
+
+fake = Faker()
+
+# Mock applicants
+applicants = pd.DataFrame({
+    'ApplicantID': range(1, 101),
+    'JAMB_Score': [fake.random_int(180, 400) for _ in range(100)],
+    'Math_Score': [fake.random_int(30, 100) for _ in range(100)],
+    'Interest': [fake.random_element(['Engineering', 'Medicine', 'Agriculture', 'Computer Science']) for _ in range(100)]
+})
+
+# Mock courses
+courses = pd.DataFrame({
+    'CourseID': [101, 102, 103, 104],
+    'Course': ['Mechanical Engineering', 'Medicine', 'Agricultural Science', 'Computer Science'],
+    'JAMB_Cutoff': [200, 280, 180, 220],
+    'Math_Cutoff': [70, 85, 60, 75],
+    'Employability': [0.75, 0.90, 0.65, 0.95]
+})
+
+applicants.to_csv('data/applicants.csv', index=False)
+courses.to_csv('data/courses.csv', index=False)
+
